@@ -11,7 +11,7 @@
 //+------------------------------------------------------------------+
 //| Script program start function                                    |
 //+------------------------------------------------------------------+
-extern float volume = 0.5;
+extern float volume = 0.05;
 void OnStart()
   {
     int res = OrderSend(Symbol(), OP_BUYLIMIT, volume, Ask - 300 * Point, 100, Ask - 600 * Point, 0, "xx", 1, 0, Green);
