@@ -28,32 +28,32 @@ int OnInit()
       if (curSb != OrderSymbol() || OrderCommission() == 0)
         continue;
       const datetime openTm = OrderOpenTime();
-      string name = i + ":" + OrderProfit();
-      int idx = iBarShift(curSb, PERIOD_D1, openTm, false);
+      string name = i;
+      int idx = iBarShift(curSb, 0, openTm, false);
       const int type = OrderType();
       double createPos = 0;
-      double profit_pos = 0;
       ENUM_OBJECT createType;
       if (type == OP_BUY || type == OP_BUYLIMIT || type == OP_BUYSTOP)
       {
-        createPos = Low[idx] - 230 * Point;
-        profit_pos = createPos - 100 * Point;
+        if(ChartPeriod() == PERIOD_M30)
+          createPos = Low[idx] - 230 / 3 * Point;
+        else
+          createPos = Low[idx] - 230 * Point;
         createType = OBJ_ARROW_UP;
       }
       else
       {
-        createPos = High[idx] + 230 * Point;
-        profit_pos = createPos + 100 * Point;
+        if(ChartPeriod() == PERIOD_M30)
+          createPos = High[idx] + 200 / 3 * Point;
+        else
+          createPos = High[idx] + 200 * Point;
         createType = OBJ_ARROW_DOWN;
       }
       if (ObjectCreate(name, createType, 0, openTm, createPos))
       {
+        string text = DoubleToStr(OrderProfit(), 1) + " " + OrderLots();
+        ObjectSetText(name, text);
         printf("set:" + ObjectSet(name, OBJPROP_COLOR, Yellow));
-        //string profit_na = name + "pf";
-        //if(ObjectCreate(profit_na, OBJ_TEXT, 0, openTm, profit_pos)) {
-          //ObjectSet(profit_na, OBJPROP_TIMEFRAMES, OBJ_PERIOD_M30);
-          //ObjectSetText(profit_na, (string)OrderProfit(), 10, "宋体", Yellow);
-        //}
       }
     }
     else
