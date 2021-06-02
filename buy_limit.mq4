@@ -11,10 +11,10 @@
 //+------------------------------------------------------------------+
 //| Script program start function                                    |
 //+------------------------------------------------------------------+
-extern float volume = 0.05;
+input double volume = 0.05;
 void OnStart()
   {
-    int res = OrderSend(Symbol(), OP_BUYLIMIT, volume, Ask - 300 * Point, 100, Ask - 600 * Point, 0, "xx", 1, 0, Green);
+    int res = OrderSend(Symbol(), OP_BUYLIMIT, volume, Ask - 300 * Point, 3, Ask - 600 * Point, 0, "xx", 1, 0, Green);
     if(res < 0) {
       Print("error! info #", GetLastError());
     }
