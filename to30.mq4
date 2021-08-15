@@ -4,8 +4,8 @@
 //|                                             https://www.mql5.com |
 //+------------------------------------------------------------------+
 #property copyright "Copyright 2021, MetaQuotes Software Corp."
-#property link      "https://www.mql5.com"
-#property version   "1.00"
+#property link "https://www.mql5.com"
+#property version "1.00"
 #property strict
 #property indicator_chart_window
 //+------------------------------------------------------------------+
@@ -14,7 +14,7 @@
 void OnInit()
 {
   //--- 启用 CHART_EVENT_MOUSE_MOVE 信息
-  //ChartSetInteger(0, CHART_EVENT_MOUSE_MOVE, 1);
+  ChartSetInteger(0, CHART_EVENT_MOUSE_MOVE, 1);
   ////--- 禁用图表的上下文菜单（在右侧）
   //ChartSetInteger(0, CHART_CONTEXT_MENU, 0);
   ////--- 禁用十字准线（通过中间按钮）
@@ -43,7 +43,7 @@ string MouseState(uint state)
 bool ctrl = false;
 void OnChartEvent(const int id, const long &lparam, const double &dparam, const string &sparam)
 {
-  int bars = WindowFirstVisibleBar();//图表左边第一根k
+  int bars = WindowFirstVisibleBar(); //图表左边第一根k
   if (id == CHARTEVENT_MOUSE_MOVE)
   {
     ctrl = ((uint)sparam & 8) == 8 ? true : false;
